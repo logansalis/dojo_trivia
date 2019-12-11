@@ -1,0 +1,95 @@
+<section class="jumbotron container">
+  <h1 class="display-4">Welcome {{ user.name }}</h1>
+  <hr />
+  <section class="row">
+    <div class="col">
+      <h3 class="mb-3">
+        Profile
+        <button class="btn btn-sm btn-primary ml-3" (click)="onEdit()">
+          Edit
+        </button>
+      </h3>
+      <form (submit)="onUpdate()" class="col-6 mb-5" *ngIf="edit; else notEdit">
+        <div class="form-group row">
+          <label for="name" class="col-3 col-form-label">Username:</label>
+          <div class="col">
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              placeholder="Username"
+              [(ngModel)]="user.name"
+            />
+            <small class="form-text text-danger" *ngIf="errors.errors.name"
+              >{{ errors.errors.name.message }}.</small
+            >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-3 col-form-label">Email:</label>
+          <div class="col">
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              placeholder="example@email.com"
+              [(ngModel)]="user.email"
+            />
+            <small class="form-text text-danger" *ngIf="errors.errors.email"
+              >{{ errors.errors.email.message }}.</small
+            >
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <input
+            type="submit"
+            value="Update"
+            class="col-3 btn btn-sm btn-primary mr-3"
+          />
+          <button
+            class="col-3 btn btn-sm btn-outline-danger ml-3"
+            (click)="onCancel()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+      <ng-template #notEdit>
+        <form class="col-6 mb-5">
+          <div class="form-group row">
+            <label for="name" class="col-3 col-form-label">Username:</label>
+            <div class="col">
+              <input
+                type="text"
+                name="name"
+                class="form-control-plaintext"
+                placeholder="Username"
+                disabled
+                [(ngModel)]="user.name"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-3 col-form-label">Email:</label>
+            <div class="col">
+              <input
+                type="email"
+                name="email"
+                class="form-control-plaintext"
+                placeholder="example@email.com"
+                disabled
+                [(ngModel)]="user.email"
+              />
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+    <div class="col-4">
+      <h3 class="mb-3">Wallet: <span class="font-weight-normal">${{ user.wallet }}</span></h3>
+    </div>
+  </section>
+</section>
+
+<app-event-alert [alertUser]=user *ngIf="socket.isEvent"></app-event-alert>
+

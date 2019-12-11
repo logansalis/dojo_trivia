@@ -1,0 +1,23 @@
+<section class="container">
+  <ul class="list-group list-group-flush scrolly border">
+    <li
+      class="list-group-item pt-1 pb-1"
+      *ngFor="let message of socket.messages"
+    >
+      {{ message.name }}: {{ message.message }}
+    </li>
+  </ul>
+  <div class="input-group mt-2">
+    <input
+      type="text"
+      name="chat"
+      placeholder="Type message here..."
+      class="form-control"
+      [(ngModel)]="msg"
+      (keydown.enter)="newMessage()"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-primary" (click)="newMessage()">Submit</button>
+    </div>
+  </div>
+</section>

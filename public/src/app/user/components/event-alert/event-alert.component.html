@@ -1,0 +1,39 @@
+<section class="container">
+  <div class="card text-center bg-image border-light">
+    <div class="card-header">
+      <p></p>
+    </div>
+    <div class="card-body card-bg">
+      <h5 class="card-title">MEAN Trivia Game</h5>
+      <p class="card-text">Current Jackpot: $$$$$</p>
+      <div class="row justify-content-center">
+        <div class="col-3 input-group">
+          <input
+            type="number"
+            name="chat"
+            placeholder="Give to Jackpot"
+            class="form-control form-control-sm"
+            [(ngModel)]="gift"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-sm btn-dark" (click)="onJoin()">
+              Give & Join
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mb-2">
+        <small class="form-text text-danger" *ngIf="errors.errors.gift">{{
+          errors.errors.gift.message
+        }}</small>
+        <small class="form-text text-danger" *ngIf="errors.errors.wallet">{{
+          errors.errors.wallet.message
+        }}</small>
+      </div>
+      <p class="card-text">Event Starts: {{ socket.countdown }}s</p>
+    </div>
+    <div class="card-footer">
+      <p></p>
+    </div>
+  </div>
+</section>

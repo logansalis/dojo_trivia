@@ -1,0 +1,29 @@
+<section class="jumbotron">
+  <div class="row text-center align-items-center">
+    <div class="col">
+      <h1 class="display-4 text-success" *ngIf="socket.countdown < 6 && socket.countdown >= 0 && !socket.isEvent">{{socket.countdown}}</h1>
+    </div>
+    <div class="col-8">
+      <h1 class="display-4" *ngIf="!socket.isEvent">Question {{socket.questionNum}}</h1>
+      <h1 class="display-4" *ngIf="socket.isEvent">Starts in {{socket.countdown}}</h1>
+      <p class="lead" *ngIf="socket.countdown < 9">{{ socket.question }}</p>
+      <hr />
+      <div class="btn-group verticle" role="group" *ngIf="socket.countdown < 9">
+        <button
+          class="btn btn-outline-primary"
+          data-toggle="button"
+          *ngFor="let ans of socket.answers"
+          (click)="log(ans)"
+          [disabled]="loser"
+        >
+          {{ans}}
+        </button>
+      </div>
+      <p class="lead" *ngIf="socket.countdown < -1">Correct Answer: {{socket.correct}}</p>
+    </div>
+    <div class="col">
+      <h1 class="display-4 text-success" *ngIf="socket.countdown < 6 && socket.countdown >= 0 && !socket.isEvent">{{socket.countdown}}</h1>
+    </div>
+  </div>
+</section>
+<app-event-chat *ngIf="socket.loser || loser"></app-event-chat>
